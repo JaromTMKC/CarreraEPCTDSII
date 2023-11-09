@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CarreraEPCTDSII.Models.Entidades.OCompraDetCarrera>
+@using CarreraEPCTDSII.Controllers;
+
+@{
+    OCompraController objCompra = new OCompraController(); 
+}
+<br>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <span class="text-dark">
+                                <i class="nav-icon fas fa-list">
+                                </i>
+                            </span>
+                            Listado De Ventas
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <a class="btn btn-success btn-sm" role="button" asp-action="Create" asp-controller="OCompra">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+                        <table class="table table-hover table-bordered table-sm">
+                            <thead>
+                                <tr class="table-info">
+                                    <th><center><strong>ID</strong></center></th>
+                                    <th><center><strong>Registro</strong></center></th>
+                                    <th><center><strong>Proveedor</strong></center></th>
+                                    <th><center><strong>Producto</strong></center></th>
+                                    <th><center><strong>UM</strong></center></th>
+                                    <th><center><strong>Cantidad</strong></center></th>
+                                    <th><center><strong>Precio</strong></center></th>
+                                    <th><center><strong>Total</strong></center></th>
+                                    <th><center><strong>Semana</strong></center></th>
+                                    <th><center><strong>Opciones</strong></center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td align="center">@item.IdOCompraDet</td>
+                                        <td align="left">@item.FechaRegistro</td>
+                                        <td align="center">@item.CompraCab.Proveedor</td>
+                                        <td align="center">@item.Producto.Nombre</td>
+                                        <td align="center">@item.Producto.UM</td>
+                                        <td align="center">@item.Cantidad</td>
+                                        <td align="center">@item.Precio</td>
+                                        <td align="center">@item.Total</td>
+                                        <td align="center">@(objCompra.SemanaAño(item.FechaRegistro))</td>
+                                        <td align="center">
+                                            <a class="btn btn-info btn-sm" role="button" asp-action="Edit" asp-controller="OCompra" asp-route-id="@item.IdOCompraDet">
+                                                <i class="far fa-edit text-white"></i>
+                                            </a>
+                                            <a class="btn btn-warning btn-sm" role="button" asp-action="Detail" asp-controller="OCompra" asp-route-id="@item.IdOCompraDet">
+                                                <i class="fa fa-eye text-white"></i>
+                                            </a>
+                                            <button class="btn btn-danger btn-sm delete-venta" data-idventa="@item.IdOCompraDet" data-nombre="@item.Producto.Nombre" data-cantidad="@item.Cantidad">
+                                                <i class="fa fa-trash text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

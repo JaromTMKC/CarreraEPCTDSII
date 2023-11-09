@@ -25,7 +25,7 @@ namespace CarreraEPCTDSII.Models.Entidades
         [ForeignKey("IdOCompraCab")]
         public virtual OCompraCabCarrera CompraCab { get; set; }
 
-        public int IdArticulo { get; set; }
+        public int IdProducto { get; set; }
         [ForeignKey("IdProducto")]
         public virtual ProductoCarrera Producto {  get; set; }
 
